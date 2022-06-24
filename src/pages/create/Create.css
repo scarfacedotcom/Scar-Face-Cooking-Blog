@@ -24,3 +24,8 @@
   text-decoration: none;
   margin: 20px auto;
 }
+
+.create button:hover {
+  background-color: #8b48e3;
+  color: black;
+}
