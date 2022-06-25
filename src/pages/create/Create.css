@@ -29,3 +29,8 @@
   background-color: #8b48e3;
   color: black;
 }
+
+.ingredients {
+  display: flex;
+  align-items: flex;
+}
