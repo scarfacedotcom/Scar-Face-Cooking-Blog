@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react"
 
-export const useFetch = (url) => {
+export const useFetch = (url, method="GET") => {
   const [data, setData] = useState(null)
   const [isPending, setIsPending] = useState(false)
   const [error, setError] = useState(null)
+  const [options, setOptions] = useState('')
+
+  const postData = (postData) => {
+
+  }
 
   useEffect(() => {
     const controller = new AbortController()
