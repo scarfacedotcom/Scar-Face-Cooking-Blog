@@ -34,9 +34,9 @@ export default function Create() {
 
   useEffect(() => {
     if (data) {
-      navigate.push('/')
+      navigate('/')
     }
-  },[data])
+  },[data, navigate])
 
 
   return (
