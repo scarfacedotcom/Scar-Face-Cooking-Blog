@@ -1,15 +1,30 @@
 import { useParams } from 'react-router-dom'
-import { useFetch } from '../../hooks/useFetch'
 import { useTheme } from '../../hooks/useTheme'
+import { projectFireStore } from '../../firebase/config'
+import { useEffect, useState } from 'react'
 
 // styles
 import './Recipe.css'
 
+
 export default function Recipe() {
   const { id } = useParams()
-  const url = 'http://localhost:3000/recipes/' + id
-  const { error, isPending, data: recipe } = useFetch(url)
   const { mode } = useTheme()
+
+  const [ data, setData ] = useState(null)
+  const [ isPending, setIspending ] = useState(false)
+  const [ error, setError ] = useState(false)
+
+  useEffect(() => {
+
+    setIspending(true)
+
+    projectFireStore.collection('recipes').doc(id).get().then((doc) => {
+      console.log(doc)
+    })
+
+
+  }, [])
   
 
   return (
