@@ -22,9 +22,14 @@ export default function Home() {
       } else {
         let results = []
         snapshot.docs.forEach(doc => {
-          console.log(doc)
+          results.push({ id: doc.id, ...doc.data()})
         })
+        setData(results)
+        setIspending(false)
       }
+    }).catch(err => {
+      setError(err.message)
+      setIspending(false)
     })
   }, [])
   
