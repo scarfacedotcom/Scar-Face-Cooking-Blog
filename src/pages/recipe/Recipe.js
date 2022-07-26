@@ -11,7 +11,7 @@ export default function Recipe() {
   const { id } = useParams()
   const { mode } = useTheme()
 
-  const [ data, setData ] = useState(null)
+  const [ recipe, setRecipe ] = useState(null)
   const [ isPending, setIspending ] = useState(false)
   const [ error, setError ] = useState(false)
 
@@ -20,7 +20,13 @@ export default function Recipe() {
     setIspending(true)
 
     projectFireStore.collection('recipes').doc(id).get().then((doc) => {
-      console.log(doc)
+      if(doc.exists) {
+        setIspending(false)
+        setRecipe(doc.data())
+      } else {
+        setIspending(false)
+        setError('could not fetch Data')
+      }
     })
 
 

@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useFetch } from '../../hooks/useFetch'
 import { useTheme } from '../../hooks/useTheme'
+import { projectFireStore } from '../../firebase/config'
+
 
 // styles
 import './Create.css'
@@ -16,11 +17,19 @@ export default function Create() {
   const navigate = useNavigate()
   const { mode } = useTheme()
 
-  const { postData, data, error } = useFetch(' http://localhost:3000/recipes', 'POST')
   
-  const handleSubmit = (e) => {
+  
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    postData({ title, ingredients, method, cookingTime: cookingTime + ' minutes' })
+    const doc = { title, ingredients, method, cookingTime: cookingTime + ' minutes' }
+
+    try {
+      await projectFireStore.collection('recipes').add(doc)
+      navigate('/')
+    } catch(err) {
+
+    }
+    
   }
 
   const handleAdd = (e) => {
@@ -34,11 +43,11 @@ export default function Create() {
     ingredientInput.current.focus()
   }
 
-  useEffect(() => {
-    if (data) {
-      navigate('/')
-    }
-  },[data, navigate])
+  // useEffect(() => {
+  //   if (data) {
+  //     navigate('/')
+  //   }
+  // },[data, navigate])
 
 
   return (
