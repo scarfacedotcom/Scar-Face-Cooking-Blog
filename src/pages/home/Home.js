@@ -31,6 +31,8 @@ export default function Home() {
       setIspending(false)
       setError(err.message)
     })
+
+    return () => unsub()
   }, [])
   
 
