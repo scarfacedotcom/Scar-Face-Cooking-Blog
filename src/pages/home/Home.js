@@ -27,9 +27,6 @@ export default function Home() {
         setData(results)
         setIspending(false)
       }
-    }).catch(err => {
-      setError(err.message)
-      setIspending(false)
     })
   }, [])
   
