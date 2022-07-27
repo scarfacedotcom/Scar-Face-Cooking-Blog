@@ -15,7 +15,7 @@ export default function Home() {
 
     setIspending(true)
 
-    projectFireStore.collection('recipes').get().then((snapshot) => {
+    const unsub = projectFireStore.collection('recipes').onSnapshot((snapshot) => {
       if (snapshot.empty) {
         setError('no data found')
         setIspending(false)
@@ -27,6 +27,9 @@ export default function Home() {
         setData(results)
         setIspending(false)
       }
+    }, (err) => {
+      setIspending(false)
+      setError(err.message)
     })
   }, [])
   
